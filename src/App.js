@@ -31,12 +31,12 @@ function App() {
             <FormGroup>
               <FormLabel>Nombre de usuario:</FormLabel>
               <Field className={'form-control'} name={'username'} required />
-              <ErrorMessage component={'div'} name={'username'} />
+              <ErrorMessage className='text-danger' component={'div'} name={'username'} />
             </FormGroup>
             <FormGroup className='mt-3'>
               <FormLabel>Contraseña:</FormLabel>
               <Field type='password' className={'form-control'} name={'password'} required />
-              <ErrorMessage component={'div'} name={'password'} />
+              <ErrorMessage className='text-danger' component={'div'} name={'password'} />
             </FormGroup>
             <FormGroup className='mt-3 text-center'>
               <Button type='submit'>Iniciar sesión</Button>
