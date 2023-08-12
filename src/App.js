@@ -1,40 +1,49 @@
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import './App.css';
-import { Button, Form, FormGroup, FormLabel } from "react-bootstrap";
+import { Button, FormGroup, FormLabel } from "react-bootstrap";
 import Swal from 'sweetalert2';
 import * as Yup from 'yup';
 
 const yupSchema = Yup.object().shape({
-    tipoId: Yup.object().required("Este campo es obligatorio"),
-    identificacion: Yup.string().required("Este campo es obligatorio"),
-    nombreCompleto: Yup.string().required("Este campo es obligatorio"),
-    generoId: Yup.object().required("Este campo es obligatorio"),
-    direccion: Yup.string().required("Este campo es obligatorio"),
-    telCel: Yup.string().required("Este campo es obligatorio")
+  username: Yup.string().required("Este campo es obligatorio"),
+  password: Yup.string().required("Este campo es obligatorio")
 })
 
 function App() {
-  function onSubmit() {
-    Swal.fire({
-      title: '¡Proceso exitoso!',
-      text: 'Inicio de sesión correcto'
-    })
-  }
-
   return (
     <div className="App">
-      <Form>
-        <FormGroup>
-          <FormLabel>Nombre de usuario:</FormLabel>
-          <input className='form-control' required />
-        </FormGroup>
-        <FormGroup className='mt-3'>
-          <FormLabel>Contraseña:</FormLabel>
-          <input type='password' className='form-control' required />
-        </FormGroup>
-        <FormGroup className='mt-3 text-center'>
-          <Button type='button' onClick={onSubmit}>Iniciar sesión</Button>
-        </FormGroup>
-      </Form>
+      <Formik
+        initialValues={{}}
+        validationSchema={yupSchema}
+        onSubmit={(values) => {
+          Swal.fire({
+            title: '¡Proceso exitoso!',
+            text: 'Usted ha iniciado sesión correctamente',
+            allowOutsideClick: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
+          })
+        }}>
+        {({ values, setFieldValue }) => (
+          <Form autoComplete='off'>
+            <FormGroup>
+              <FormLabel>Nombre de usuario:</FormLabel>
+              <Field className={'form-control'} name={'username'} required />
+              <ErrorMessage component={'div'} name={'username'} />
+            </FormGroup>
+            <FormGroup className='mt-3'>
+              <FormLabel>Contraseña:</FormLabel>
+              <Field type='password' className={'form-control'} name={'password'} required />
+              <ErrorMessage component={'div'} name={'password'} />
+            </FormGroup>
+            <FormGroup className='mt-3 text-center'>
+              <Button type='submit'>Iniciar sesión</Button>
+            </FormGroup>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 }
