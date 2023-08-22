@@ -42,9 +42,7 @@
   }
 }
 
-form {
-  width: 30%;
-  padding: 25px;
-  background-color: #ffffff;
+.container-tarea {
+  background-color: rgb(159, 194, 196);
   border-radius: 10px;
 }

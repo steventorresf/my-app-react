@@ -1,50 +1,35 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Card } from 'react-bootstrap';
 import './App.css';
-import { Button, FormGroup, FormLabel } from "react-bootstrap";
-import Swal from 'sweetalert2';
-import * as Yup from 'yup';
-
-const yupSchema = Yup.object().shape({
-  username: Yup.string().required("Este campo es obligatorio"),
-  password: Yup.string().required("Este campo es obligatorio")
-})
+import Formulario from './components/form';
+import DataTable from './components/table';
+import { useState } from 'react';
 
 function App() {
+  const [data, setData] = useState([]);
+
   return (
-    <div className="App">
-      <Formik
-        initialValues={{}}
-        validationSchema={yupSchema}
-        onSubmit={(values) => {
-          Swal.fire({
-            title: '¡Proceso exitoso!',
-            text: 'Usted ha iniciado sesión correctamente',
-            allowOutsideClick: false
-          }).then((result) => {
-            if (result.isConfirmed) {
-              window.location.reload();
-            }
-          })
-        }}>
-        {({ values, setFieldValue }) => (
-          <Form autoComplete='off'>
-            <FormGroup>
-              <FormLabel>Nombre de usuario:</FormLabel>
-              <Field className={'form-control'} name={'username'} required />
-              <ErrorMessage className='text-danger' component={'div'} name={'username'} />
-            </FormGroup>
-            <FormGroup className='mt-3'>
-              <FormLabel>Contraseña:</FormLabel>
-              <Field type='password' className={'form-control'} name={'password'} required />
-              <ErrorMessage className='text-danger' component={'div'} name={'password'} />
-            </FormGroup>
-            <FormGroup className='mt-3 text-center'>
-              <Button type='submit'>Iniciar sesión</Button>
-            </FormGroup>
-          </Form>
-        )}
-      </Formik>
-    </div>
+    <>
+      <div className="App">
+        <Card body className='w-50'>
+          <div className='row'>
+            <div className='col-12 offset-sm-1 col-sm-10'>
+              <div className='text-center mt-1'>
+                <h1 className='title'>Task Manager</h1>
+              </div>
+              <div className='mt-5'>
+                <Formulario data={data} setData={setData} />
+              </div>
+              <div className='mt-5'>
+                <DataTable data={data} setData={setData} />
+              </div>
+              <div className='text-center mt-5'>
+                <strong>Design by:</strong> Steven Torres Fernández
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </>
   );
 }
 
