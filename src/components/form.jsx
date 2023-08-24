@@ -26,7 +26,7 @@ const Formulario = ({ data, setData }) => {
                     { id: getNewUseId(), descripcion: values.texto }
                 ]);
 
-                resetForm({});
+                resetForm({ texto: '' });
             }}>
             {() => (
                 <Form noValidate autoComplete='off'>

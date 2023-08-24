@@ -23,7 +23,8 @@ function App() {
                 <DataTable data={data} setData={setData} />
               </div>
               <div className='text-center mt-5'>
-                <strong>Design by:</strong> Steven Torres Fernández
+                <strong>Design by:</strong> 
+                <span> Steven Torres</span> y <span>Daimer Márquez</span>
               </div>
             </div>
           </div>
